@@ -10,10 +10,16 @@ Target: 2-3 months of build
 
 **Goal:** Ship a working Flutter app with the full Developer Track (4 modules, ~40 lessons), streak system, and LinkedIn-shareable certification. Open source from day one.
 
+### Status (last updated 2026-06-23)
+
+Foundation skeleton is in place and green (`flutter analyze` clean, all tests passing): theme (ADR-010), gamification XP/level constants (ADR-007), content models + asset loader with seed content (ADR-005), Drift schema + DAOs (ADR-006), go_router + screens (ADR-004), and the multiple-choice lesson player with immediate feedback. Riverpod is on 3.x (ADR-001 amended).
+
+**Resume here next:** gamification notifiers (`ProgressNotifier`/`StreakNotifier`/`BadgeNotifier`) wired to the DAOs so XP/streak/badges persist and the completion screen comes alive; then the write-a-prompt apply flow (input + model-answer self-evaluation); then real skill-tree lock derivation (currently a placeholder prerequisite check). Content is two seed lessons in Module 1 only — the reviewed lesson set and the content pipeline (ADR-011) are still to do.
+
 ### Build
-- [ ] Flutter project scaffold (iOS + Android targets)
+- [x] Flutter project scaffold (iOS + Android targets)
 - [ ] Skill tree home screen (4 modules, locked/unlocked states, XP display)
-- [ ] Lesson player: multiple choice flow with immediate feedback
+- [x] Lesson player: multiple choice flow with immediate feedback
 - [ ] Lesson player: write-a-prompt flow with model-answer self-evaluation (no live grader in v1)
 - [ ] Streak counter (local, daily reset)
 - [ ] Push notification for streak reminder
