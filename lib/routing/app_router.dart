@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../screens/badge_screen.dart';
 import '../screens/certificate_screen.dart';
 import '../screens/lesson_complete_screen.dart';
-import '../screens/lesson_player_screen.dart';
+import '../screens/lesson_player/lesson_player_screen.dart';
 import '../screens/module_detail_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/skill_tree_screen.dart';
