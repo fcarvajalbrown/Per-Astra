@@ -1,0 +1,29 @@
+{
+  "id": "m1-l2",
+  "moduleId": "m1",
+  "title": "Organizing Prompts with XML Tags",
+  "xpValue": 20,
+  "steps": [
+    {
+      "type": "multiple_choice",
+      "question": "Why are XML-style tags (like <context> ... </context>) useful in a prompt?",
+      "options": [
+        "They make the model respond faster.",
+        "They clearly separate different parts of the input so the model can tell them apart.",
+        "They are required for the API to accept the request.",
+        "They reduce the number of tokens used."
+      ],
+      "correctIndex": 1,
+      "explanation": "Tags delimit sections such as instructions, context, and examples so the model can distinguish them. They are a helpful convention, not an API requirement."
+    },
+    {
+      "type": "write_prompt",
+      "task": "Write a prompt that gives Claude a block of user-provided text inside tags and asks it to list any spelling mistakes.",
+      "modelAnswer": "Find every spelling mistake in the text below and list each one on its own line. Only consider the text inside the tags:\n\n<text>\n{{USER_TEXT}}\n</text>",
+      "hints": [
+        "Wrap the user text in a clearly named tag.",
+        "Tell the model to only look inside the tags."
+      ]
+    }
+  ]
+}

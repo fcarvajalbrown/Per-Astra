@@ -1,0 +1,29 @@
+{
+  "id": "m1-l1",
+  "moduleId": "m1",
+  "title": "Prompt Structure Basics",
+  "xpValue": 20,
+  "steps": [
+    {
+      "type": "multiple_choice",
+      "question": "Which prompt is more likely to produce a structured, predictable response?",
+      "options": [
+        "Tell me about dogs.",
+        "Write three bullet points about dogs, each one sentence long.",
+        "dogs?",
+        "Everything about dogs, please."
+      ],
+      "correctIndex": 1,
+      "explanation": "Being explicit about the format and length you want gives the model a clear target, which produces more predictable output."
+    },
+    {
+      "type": "write_prompt",
+      "task": "Write a prompt that asks Claude to summarize a document in exactly three bullet points.",
+      "modelAnswer": "Summarize the following document in exactly three bullet points, each starting with a dash and no longer than one sentence:\n\n<document>\n{{DOCUMENT}}\n</document>",
+      "hints": [
+        "State the exact number of bullet points.",
+        "Use a tag or placeholder to mark where the document goes."
+      ]
+    }
+  ]
+}

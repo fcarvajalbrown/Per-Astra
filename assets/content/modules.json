@@ -1,0 +1,32 @@
+{
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Prompt Fundamentals",
+      "description": "Prompt structure, clarity, and using XML tags to organize a prompt.",
+      "prerequisites": [],
+      "lessonIds": ["m1-l1", "m1-l2"]
+    },
+    {
+      "id": "m2",
+      "title": "Role Prompting + Few-Shot",
+      "description": "Assigning Claude a role, few-shot examples, and controlling output format.",
+      "prerequisites": ["m1"],
+      "lessonIds": []
+    },
+    {
+      "id": "m3",
+      "title": "Chain of Thought + Extended Thinking",
+      "description": "Step-by-step reasoning and Claude's extended thinking feature.",
+      "prerequisites": ["m2"],
+      "lessonIds": []
+    },
+    {
+      "id": "m4",
+      "title": "API Integration + Tool Use",
+      "description": "Calling the API, defining tools, and handling tool use responses.",
+      "prerequisites": ["m3"],
+      "lessonIds": []
+    }
+  ]
+}
