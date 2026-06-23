@@ -33,6 +33,10 @@ migrate_working_dir/
 /build/
 /coverage/
 
+# Generated code (build_runner: Drift + Riverpod). Run
+# `dart run build_runner build` after clone — see README.
+*.g.dart
+
 # Symbolication related
 app.*.symbols
 
