@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <rect width="240" height="240" rx="36" fill="#0D1117"/>
+
+  <!-- Scatter stars -->
+  <circle cx="44" cy="52" r="1.5" fill="#58A6FF" opacity="0.45"/>
+  <circle cx="196" cy="68" r="1"   fill="#58A6FF" opacity="0.45"/>
+  <circle cx="54"  cy="155" r="1.5" fill="#58A6FF" opacity="0.35"/>
+  <circle cx="202" cy="134" r="1"   fill="#58A6FF" opacity="0.4"/>
+  <circle cx="178" cy="44"  r="1"   fill="#58A6FF" opacity="0.3"/>
+  <circle cx="30"  cy="120" r="1"   fill="#58A6FF" opacity="0.3"/>
+
+  <!-- Constellation lines -->
+  <line x1="120" y1="58"  x2="74"  y2="98"  stroke="#58A6FF" stroke-width="1.5" opacity="0.35"/>
+  <line x1="120" y1="58"  x2="166" y2="98"  stroke="#58A6FF" stroke-width="1.5" opacity="0.35"/>
+  <line x1="74"  y1="98"  x2="89"  y2="145" stroke="#58A6FF" stroke-width="1.5" opacity="0.35"/>
+  <line x1="166" y1="98"  x2="151" y2="145" stroke="#58A6FF" stroke-width="1.5" opacity="0.35"/>
+  <line x1="89"  y1="145" x2="151" y2="145" stroke="#58A6FF" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Constellation stars -->
+  <circle cx="120" cy="58"  r="5.5" fill="#58A6FF"/>
+  <circle cx="74"  cy="98"  r="4"   fill="#58A6FF"/>
+  <circle cx="166" cy="98"  r="4"   fill="#58A6FF"/>
+  <circle cx="89"  cy="145" r="3"   fill="#58A6FF"/>
+  <circle cx="151" cy="145" r="3"   fill="#58A6FF"/>
+
+  <!-- Wordmark -->
+  <text x="120" y="188"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="23"
+        font-weight="bold"
+        fill="#FFFFFF"
+        text-anchor="middle"
+        letter-spacing="6">PER ASTRA</text>
+
+  <!-- Tagline -->
+  <text x="120" y="210"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="8.5"
+        fill="#58A6FF"
+        text-anchor="middle"
+        letter-spacing="3"
+        opacity="0.75">LEARN  ·  BUILD  ·  MASTER</text>
+</svg>
