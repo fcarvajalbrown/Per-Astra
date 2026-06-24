@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../content/models.dart';
+import '../content/content_providers.dart';
 import '../data/providers.dart';
 import '../routing/app_router.dart';
+import '../theme/app_theme.dart';
 
-/// Lists the lessons within a module (ADR-004). Placeholder list; completion
-/// state and XP will be layered on in feature work.
+/// Lists the lessons within a module (ADR-004), with real titles and a
+/// completion checkmark derived from the live progress set.
 class ModuleDetailScreen extends ConsumerWidget {
   const ModuleDetailScreen({required this.moduleId, super.key});
 
@@ -15,25 +16,20 @@ class ModuleDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final repo = ref.watch(contentRepositoryProvider);
+    final lessons = ref.watch(moduleLessonsProvider(moduleId));
+    final completed =
+        ref.watch(completedLessonIdsProvider).asData?.value ?? const <String>{};
 
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(onPressed: () => context.goNamed(AppRoutes.skillTree)),
         title: Text(moduleId.toUpperCase()),
       ),
-      body: FutureBuilder<List<Module>>(
-        future: repo.loadModules(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final module =
-              snapshot.data!.where((m) => m.id == moduleId).firstOrNull;
-          if (module == null) {
-            return Center(child: Text('Unknown module: $moduleId'));
-          }
-          if (module.lessonIds.isEmpty) {
+      body: lessons.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, _) => Center(child: Text('Failed to load module: $e')),
+        data: (items) {
+          if (items.isEmpty) {
             return const Center(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -46,18 +42,26 @@ class ModuleDetailScreen extends ConsumerWidget {
           }
           return ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: module.lessonIds.length,
+            itemCount: items.length,
             itemBuilder: (context, i) {
-              final lessonId = module.lessonIds[i];
+              final lesson = items[i];
+              final done = completed.contains(lesson.id);
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
                 child: ListTile(
-                  leading: CircleAvatar(child: Text('${i + 1}')),
-                  title: Text(lessonId),
+                  leading: done
+                      ? const Icon(Icons.check_circle,
+                          color: AppColors.success)
+                      : CircleAvatar(child: Text('${i + 1}')),
+                  title: Text(lesson.title),
+                  subtitle: Text('${lesson.steps.length} steps'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => context.goNamed(
                     AppRoutes.lesson,
-                    pathParameters: {'moduleId': moduleId, 'lessonId': lessonId},
+                    pathParameters: {
+                      'moduleId': moduleId,
+                      'lessonId': lesson.id,
+                    },
                   ),
                 ),
               );
