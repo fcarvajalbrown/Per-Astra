@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../content/models.dart';
+import '../../gamification/lesson_completion.dart';
 import '../../routing/app_router.dart';
 import 'lesson_player_controller.dart';
 import 'multiple_choice_view.dart';
@@ -60,9 +61,21 @@ class LessonPlayerScreen extends ConsumerWidget {
         data: (state) => _ContinueBar(
           enabled: _canContinue(state),
           isLast: state.isLastStep,
-          onContinue: () {
+          onContinue: () async {
             final finished = controller.advance();
-            if (finished) context.goNamed(AppRoutes.lessonComplete);
+            if (!finished) return;
+            await ref.read(lessonCompletionProvider.notifier).record(
+                  lessonId: lessonId,
+                  moduleId: moduleId,
+                  lessonXpValue: state.lesson.xpValue,
+                  hasMultipleChoice: state.multipleChoiceCount > 0,
+                  allFirstTryCorrect: state.allFirstTryCorrect,
+                  // Self-evaluation flow lands in a later slice; until then a
+                  // seen write-a-prompt step counts as passed.
+                  writePromptPassed:
+                      state.lesson.steps.any((s) => s is WritePromptStep),
+                );
+            if (context.mounted) context.goNamed(AppRoutes.lessonComplete);
           },
         ),
         orElse: () => null,

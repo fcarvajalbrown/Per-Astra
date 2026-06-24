@@ -95,6 +95,11 @@ class ProfileDao extends DatabaseAccessor<AppDatabase>
   Future<UserProfile?> getProfile() =>
       select(userProfiles).getSingleOrNull();
 
+  /// Emits the (single) profile row and re-emits whenever it changes, so XP and
+  /// level displays stay live without manual invalidation.
+  Stream<UserProfile?> watchProfile() =>
+      select(userProfiles).watchSingleOrNull();
+
   Future<void> upsertProfile(UserProfilesCompanion profile) =>
       into(userProfiles).insertOnConflictUpdate(profile);
 }
@@ -105,6 +110,9 @@ class StreakDao extends DatabaseAccessor<AppDatabase> with _$StreakDaoMixin {
   StreakDao(super.db);
 
   Future<Streak?> getStreak() => select(streaks).getSingleOrNull();
+
+  /// Emits the (single) streak row and re-emits whenever it changes.
+  Stream<Streak?> watchStreak() => select(streaks).watchSingleOrNull();
 
   Future<void> upsertStreak(StreaksCompanion streak) =>
       into(streaks).insertOnConflictUpdate(streak);
